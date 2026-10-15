@@ -1,0 +1,55 @@
+/* ==========================================================================
+   Responsive refinements (base styles are mobile-first in main.css)
+   ========================================================================== */
+
+/* Very small phones (≤ 360px) */
+@media (max-width: 360px) {
+  .galaxy__map { --orb: 58px; min-height: 580px; }
+  .planet__title { font-size: 0.92rem; }
+  .things { gap: 10px; }
+  .thing__light { min-height: 108px; }
+  .game__hud { gap: 8px; }
+  .memory-card__nav .btn { padding-inline: 0.9em; }
+}
+
+/* Large phones / small tablets */
+@media (min-width: 560px) {
+  .things { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .envelopes { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+  .dialog__inner { padding: 28px 30px 30px; }
+}
+
+/* Landscape galaxy layout (matches the JS media query in galaxy.js) */
+@media (min-width: 700px) and (min-aspect-ratio: 1/1) {
+  .galaxy__map {
+    --orb: clamp(78px, 8.5vw, 118px);
+    width: min(100%, 1100px);
+    min-height: 380px;
+    height: calc(var(--vh-full) - 250px);
+    max-height: 620px;
+  }
+  .planet { max-width: 22vw; }
+}
+
+/* Desktop */
+@media (min-width: 1024px) {
+  .envelopes { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 30px; }
+  .envelope-item { max-width: none; }
+  .sky { max-height: 520px; width: min(100%, 620px); }
+}
+
+/* Short landscape phones: let things scroll naturally, shrink hero items */
+@media (max-height: 520px) and (orientation: landscape) {
+  .portal { width: 120px; }
+  .entrance { gap: 10px; }
+  .entrance__name-main { font-size: 2.6rem; }
+  .galaxy__map { min-height: 360px; height: 360px; }
+  .finale__stage { width: min(60vh, 300px); }
+  .game__arena { height: 300px; }
+  .view--entrance { place-items: start center; }
+}
+
+/* Touch devices: hover-only flourishes are never required */
+@media (hover: none) {
+  .envelope:hover .envelope__art { transform: none; }
+}

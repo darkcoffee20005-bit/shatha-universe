@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>كون باسمج ✦</title>
+  <meta name="description" content="A Universe Named After You — a small interactive universe made for one special person.">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#080B1D">
+  <meta name="color-scheme" content="dark">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23080B1D'/%3E%3Cpath d='M32 10l4.8 15.2L52 30l-15.2 4.8L32 50l-4.8-15.2L12 30l15.2-4.8z' fill='%23FFF3C4'/%3E%3C/svg%3E">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600&display=swap">
+
+  <link rel="stylesheet" href="./css/main.css">
+  <link rel="stylesheet" href="./css/animations.css">
+  <link rel="stylesheet" href="./css/responsive.css">
+  <script type="module" src="./js/app.js"></script>
+</head>
+<body data-view="entrance">
+  <!-- Ambient background layers (decorative) -->
+  <canvas id="starfield" class="starfield" aria-hidden="true"></canvas>
+  <div class="nebula" aria-hidden="true">
+    <span class="nebula__cloud nebula__cloud--a"></span>
+    <span class="nebula__cloud nebula__cloud--b"></span>
+    <span class="nebula__cloud nebula__cloud--c"></span>
+  </div>
+  <div id="fx-layer" class="fx-layer" aria-hidden="true"></div>
+
+  <!-- Global sound control (off by default) -->
+  <button id="sound-toggle" class="sound-toggle" type="button" aria-pressed="false" aria-label="شغّلي الموسيقى">
+    <svg class="icon icon--sound-on" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path d="M16 8.5a5 5 0 0 1 0 7M18.5 6a8.5 8.5 0 0 1 0 12" fill="none"/></svg>
+    <svg class="icon icon--sound-off" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path d="M16.5 9.5l5 5m0-5l-5 5" fill="none"/></svg>
+  </button>
+
+  <noscript>
+    <p class="noscript">هذا الكون يحتاج JavaScript حتى يشتغل ✦ — This universe needs JavaScript enabled.</p>
+  </noscript>
+
+  <main id="main">
+    <!-- ═════════════ 1. Cosmic Entrance ═════════════ -->
+    <section class="view view--entrance" id="view-entrance" data-view="entrance" aria-labelledby="entrance-name">
+      <div class="entrance">
+        <p class="overline entrance__overline" data-i18n="entranceOverline"></p>
+        <div class="portal" aria-hidden="true">
+          <span class="portal__halo"></span>
+          <span class="portal__ring portal__ring--outer"></span>
+          <span class="portal__ring portal__ring--inner"></span>
+          <span class="portal__core"></span>
+        </div>
+        <h1 class="entrance__name" id="entrance-name" tabindex="-1">
+          <span class="entrance__name-main" data-bind="herName"></span>
+          <span class="entrance__name-latin" data-bind="herNameLatin" lang="en" dir="ltr"></span>
+        </h1>
+        <p class="entrance__message" data-bind="welcomeMessage"></p>
+        <button class="btn btn--primary entrance__start" id="entrance-start" type="button"></button>
+      </div>
+      <div class="entrance__flash" aria-hidden="true"></div>
+      <button class="btn btn--ghost skip-btn" id="entrance-skip" type="button" data-i18n="skip" hidden></button>
+    </section>
+
+    <!-- ═════════════ 2. Her Galaxy ═════════════ -->
+    <section class="view view--galaxy" id="view-galaxy" data-view="galaxy" aria-labelledby="galaxy-title" hidden>
+      <header class="galaxy__header">
+        <p class="overline" data-i18n="galaxyOverline"></p>
+        <h1 class="galaxy__title" id="galaxy-title" tabindex="-1" data-bind="galaxyName"></h1>
+        <div class="progress">
+          <ol class="progress__dots" aria-hidden="true"></ol>
+          <p class="progress__label" id="galaxy-progress"></p>
+        </div>
+      </header>
+      <div class="galaxy__map" id="galaxy-map">
+        <svg class="galaxy__lines" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"></svg>
+        <ul class="galaxy__planets" role="list"></ul>
+      </div>
+      <p class="galaxy__hint" id="galaxy-hint" aria-live="polite"></p>
+    </section>
+
+    <!-- ═════════════ 3. Planet of Memories ═════════════ -->
+    <section class="view view--planet view--memories" id="view-memories" data-view="memories" aria-labelledby="memories-title" hidden>
+      <header class="view-header">
+        <button class="btn btn--back" type="button" data-action="back">
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none"/></svg>
+          <span data-i18n="back"></span>
+        </button>
+      </header>
+      <div class="planet-view">
+        <h1 class="planet-view__title" id="memories-title" tabindex="-1" data-planet-title="memories"></h1>
+        <p class="planet-view__intro" data-i18n="memoriesHint"></p>
+        <div class="sky" id="memory-sky">
+          <svg class="sky__lines" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"></svg>
+          <ul class="sky__stars" role="list"></ul>
+        </div>
+        <p class="planet-view__progress" id="memories-progress" aria-live="polite"></p>
+        <div class="completion" id="memories-complete" hidden></div>
+      </div>
+    </section>
+
+    <!-- ═════════════ 4. Planet of Little Things ═════════════ -->
+    <section class="view view--planet view--things" id="view-littleThings" data-view="littleThings" aria-labelledby="things-title" hidden>
+      <header class="view-header">
+        <button class="btn btn--back" type="button" data-action="back">
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none"/></svg>
+          <span data-i18n="back"></span>
+        </button>
+      </header>
+      <div class="planet-view">
+        <h1 class="planet-view__title" id="things-title" tabindex="-1" data-planet-title="littleThings"></h1>
+        <p class="planet-view__intro" data-i18n="thingsHint"></p>
+        <ul class="things" id="things-list" role="list"></ul>
+        <p class="planet-view__progress" id="things-progress" aria-live="polite"></p>
+        <div class="completion" id="things-complete" hidden></div>
+      </div>
+    </section>
+
+    <!-- ═════════════ 5. Planet of Secret Letters ═════════════ -->
+    <section class="view view--planet view--letters" id="view-letters" data-view="letters" aria-labelledby="letters-title" hidden>
+      <header class="view-header">
+        <button class="btn btn--back" type="button" data-action="back">
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none"/></svg>
+          <span data-i18n="back"></span>
+        </button>
+      </header>
+      <div class="planet-view">
+        <h1 class="planet-view__title" id="letters-title" tabindex="-1" data-planet-title="letters"></h1>
+        <p class="planet-view__intro" data-i18n="lettersHint"></p>
+        <ul class="envelopes" id="envelopes" role="list"></ul>
+        <p class="planet-view__progress" id="letters-progress" aria-live="polite"></p>
+        <div class="completion" id="letters-complete" hidden></div>
+      </div>
+    </section>
+
+    <!-- ═════════════ 6. Catch-a-Star ═════════════ -->
+    <section class="view view--planet view--game" id="view-game" data-view="game" aria-labelledby="game-title" hidden>
+      <header class="view-header">
+        <button class="btn btn--back" type="button" data-action="back">
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none"/></svg>
+          <span data-i18n="back"></span>
+        </button>
+      </header>
+      <div class="planet-view game">
+        <h1 class="planet-view__title" id="game-title" tabindex="-1" data-planet-title="game"></h1>
+        <div class="game__hud">
+          <p class="hud-item"><span class="hud-item__label" data-i18n="gameTime"></span> <strong class="hud-item__value" id="game-time"></strong></p>
+          <div class="game__timebar" aria-hidden="true"><span id="game-timebar"></span></div>
+          <p class="hud-item"><span class="hud-item__label" data-i18n="gameStars"></span> <strong class="hud-item__value" id="game-score" aria-live="polite"></strong></p>
+        </div>
+        <div class="game__arena" id="game-arena" tabindex="0">
+          <svg class="game__lines" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"></svg>
+          <div class="game__panel" id="game-intro">
+            <h2 class="game__panel-title" data-i18n="gameRulesTitle"></h2>
+            <p class="game__rules" id="game-rules"></p>
+            <p class="game__note" id="game-note" hidden data-i18n="gameAlreadyWon"></p>
+            <p class="game__kbd" data-i18n="gameKeyboardHint"></p>
+            <button class="btn btn--primary" id="game-start" type="button" data-i18n="gameStart"></button>
+          </div>
+          <div class="game__panel" id="game-lose" hidden>
+            <h2 class="game__panel-title" data-i18n="gameLoseTitle"></h2>
+            <p id="game-lose-text"></p>
+            <button class="btn btn--primary" id="game-retry" type="button" data-i18n="gameRetry"></button>
+          </div>
+        </div>
+        <div class="game__message" id="game-message" hidden>
+          <ol class="reveal-lines" id="game-lines" role="list"></ol>
+          <div class="completion completion--inline" id="game-complete" hidden></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═════════════ 7. The Final Star ═════════════ -->
+    <section class="view view--final" id="view-final" data-view="final" aria-labelledby="final-name" hidden>
+      <header class="view-header">
+        <button class="btn btn--back" type="button" data-action="back">
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none"/></svg>
+          <span data-i18n="back"></span>
+        </button>
+      </header>
+      <div class="finale">
+        <div class="finale__stage" aria-hidden="true">
+          <svg class="finale__heart" viewBox="0 0 100 100">
+            <path class="finale__path" pathLength="1"></path>
+            <g class="finale__stars"></g>
+          </svg>
+        </div>
+        <h1 class="finale__name" id="final-name" tabindex="-1" data-bind="herName"></h1>
+        <p class="finale__message" data-bind="finalMessage"></p>
+        <figure class="finale__photo" id="finale-photo" hidden></figure>
+        <button class="btn btn--primary finale__read" id="finale-read" type="button" data-i18n="finalRead"></button>
+        <article class="finale__letter" id="finale-letter" hidden>
+          <p class="finale__greeting" id="finale-greeting"></p>
+          <div class="finale__letter-body" id="finale-letter-body"></div>
+          <p class="finale__signature" id="finale-signature"></p>
+        </article>
+        <div class="finale__actions" id="finale-actions" hidden>
+          <button class="btn btn--ghost" type="button" data-action="back" data-i18n="backToGalaxy"></button>
+          <button class="btn btn--quiet" type="button" id="finale-replay" data-i18n="replay"></button>
+        </div>
+      </div>
+      <button class="btn btn--ghost skip-btn" id="finale-skip" type="button" data-i18n="skip" hidden></button>
+    </section>
+  </main>
+
+  <!-- ═════════════ Dialogs ═════════════ -->
+  <dialog class="dialog dialog--memory" id="memory-dialog" aria-labelledby="memory-title">
+    <div class="dialog__inner">
+      <button class="dialog__close" type="button" data-close data-i18n-label="close">
+        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" fill="none"/></svg>
+      </button>
+      <div class="memory-card__media" id="memory-media"></div>
+      <p class="memory-card__meta"><span id="memory-index"></span><span id="memory-date"></span></p>
+      <h2 class="memory-card__title" id="memory-title"></h2>
+      <p class="memory-card__text" id="memory-text"></p>
+      <div class="memory-card__nav">
+        <button class="btn btn--ghost btn--small" type="button" id="memory-prev" data-i18n="prev"></button>
+        <button class="btn btn--ghost btn--small" type="button" id="memory-next" data-i18n="next"></button>
+      </div>
+    </div>
+  </dialog>
+
+  <dialog class="dialog dialog--letter" id="letter-dialog" aria-labelledby="letter-title">
+    <div class="dialog__inner">
+      <button class="dialog__close" type="button" data-close data-i18n-label="close">
+        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" fill="none"/></svg>
+      </button>
+      <p class="overline" id="letter-label"></p>
+      <h2 class="letter__title" id="letter-title"></h2>
+      <div class="letter__body" id="letter-body"></div>
+      <p class="letter__sign" id="letter-sign"></p>
+    </div>
+  </dialog>
+
+  <dialog class="dialog dialog--confirm" id="confirm-dialog" aria-labelledby="confirm-title">
+    <div class="dialog__inner">
+      <h2 id="confirm-title" data-confirm-title></h2>
+      <p data-confirm-text></p>
+      <div class="dialog__actions">
+        <button class="btn btn--ghost" type="button" data-confirm-no></button>
+        <button class="btn btn--primary" type="button" data-confirm-yes></button>
+      </div>
+    </div>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <div class="sr-only" id="announcer" aria-live="assertive"></div>
+</body>
+</html>
