@@ -109,6 +109,6 @@ her-universe/
 ## 7. Known limitations
 
 - Placeholder memories, little things and parts of the letters must be filled in by you.
-- Google Fonts load from the network. Offline, the site falls back to system fonts.
+- Fonts (Amiri, IBM Plex Sans Arabic, Cormorant Garamond) are bundled in `assets/fonts/`, so they load reliably on iPhone and inside Instagram's in-app browser.
 - Progress is saved per browser and device. Opening the site on another phone starts fresh.
 - Browsers without native `<dialog>` support (very old ones) get a basic fallback without a backdrop.
