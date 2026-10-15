@@ -10,18 +10,18 @@ import { burstFrom } from './fx.js';
 /* Planet positions (in % of the map). Mirrored automatically for RTL. */
 const LAYOUTS = {
   portrait: {
-    memories: [27, 10],
-    littleThings: [73, 29],
-    letters: [27, 48],
-    game: [73, 67],
-    final: [36, 90],
+    memories: [27, 9],
+    littleThings: [73, 28],
+    letters: [27, 47],
+    game: [73, 66],
+    final: [36, 85],
   },
   landscape: {
-    memories: [11, 38],
-    littleThings: [30, 70],
-    letters: [50, 32],
-    game: [70, 70],
-    final: [89, 40],
+    memories: [11, 30],
+    littleThings: [30, 62],
+    letters: [50, 24],
+    game: [70, 62],
+    final: [89, 32],
   },
 };
 

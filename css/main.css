@@ -450,7 +450,9 @@ main { position: relative; z-index: 1; }
   position: absolute;
   left: var(--x, 50%);
   top: var(--y, 50%);
-  transform: translate(-50%, -50%);
+  /* Anchor the ORB centre (not the whole button) on the point, so the
+     constellation lines meet the planets instead of crossing the labels. */
+  transform: translate(-50%, calc(var(--orb) / -2 - 6px));
   transition: left 0.6s var(--ease-out), top 0.6s var(--ease-out);
 }
 
@@ -499,7 +501,12 @@ main { position: relative; z-index: 1; }
 .planet__label {
   display: grid;
   gap: 0.05rem;
+  padding: 0.2rem 0.75rem 0.3rem;
+  border-radius: 14px;
+  background: rgba(8, 11, 29, 0.72);
   line-height: 1.35;
+  position: relative;
+  z-index: 2; /* keep names above orbiting moons */
 }
 .planet__title {
   font-family: var(--font-display);
